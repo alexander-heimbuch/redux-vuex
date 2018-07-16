@@ -186,7 +186,7 @@ export default {
 
 ## Caveats
 
-* Can't use computed values like in vuex, vuex can bind to it's reactive state, for redux that's not effciently possible
+* Can't use computed values like in vuex, vuex can bind to it's reactive state, for redux that's not efficiently possible
 * Accessing other mapped values in custom getters does not work on initial cycle
 
 ## License
