@@ -1,10 +1,11 @@
 {
-  "name": "re-vue",
+  "name": "redux-vuex",
   "version": "0.1.0",
   "description": "Redux bindings for VueJS inspired by Vuex.",
   "main": "index.js",
   "keywords": ["vue", "vuejs", "redux", "vuex", "bindings"],
-  "author": "Alexander Heimbuch <npm@heimbu.ch>",
+  "author": "Alexander Heimbuch <github@heimbu.ch>",
+  "repository": "git@github.com:alexander-heimbuch/redux-vuex.git",
   "license": "MIT",
   "dependencies": {
     "get-value": "^3.0.1",

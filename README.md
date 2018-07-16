@@ -1,4 +1,4 @@
-# re-vue
+# redux-vuex
 [Redux](https://github.com/reduxjs/redux) bindings for [VueJS](https://github.com/vuejs/vue) inspired by [Vuex](https://github.com/vuejs/vuex).
 
 ## First things first
@@ -19,12 +19,12 @@ Valid point, it seems the needs for integrating with redux is strong. So dependi
 
 ## Installation
 
-`re-vue` is written in pure es6 and only has dependencies to the beautiful crafted packages [get-value](https://github.com/jonschlinkert/get-value) and [set-value](https://github.com/jonschlinkert/set-value)
+`redux-vuex` is written in pure es6 and only has dependencies to the beautiful crafted packages [get-value](https://github.com/jonschlinkert/get-value) and [set-value](https://github.com/jonschlinkert/set-value)
 
 ### Get the Package
 
 ```
-npm i re-vue // yarn add re-vue
+npm i redux-vuex // yarn add redux-vuex
 ```
 
 ### Connect it to your Vue application
@@ -32,7 +32,7 @@ npm i re-vue // yarn add re-vue
 ```javascript
 import Vue from 'vue'
 import { createStore } from 'redux'
-import { connect } from 're-vue'
+import { connect } from 'redux-vuex'
 
 import { reducers, actions } from './store'
 
@@ -47,14 +47,14 @@ connect({
 
 ## Usage
 
-`re-vue` is focused on simplifying the access to the redux state and bind state changes to the vue instance in an efficient way. 
+`redux-vuex` is focused on simplifying the access to the redux state and bind state changes to the vue instance in an efficient way. 
 
 ### mapState
 
 To assign state with ease to your component `mapState` needs to be used. It has two different signatures, depending on your component needs:
 
 ```javascript
-import { mapState } from 're-vue'
+import { mapState } from 'redux-vuex'
 
 export default {
   name: 'My Vue Component',
@@ -63,7 +63,7 @@ export default {
 ```
 
 ```javascript
-import { mapState } from 're-vue'
+import { mapState } from 'redux-vuex'
 
 export default {
   name: 'My Vue Component',
@@ -111,7 +111,7 @@ const actions = {
 ```
 
 ```javascript
-import { mapActions } from 're-vue'
+import { mapActions } from 'redux-vuex'
 
 export default {
   name: 'My Vue component',
@@ -125,7 +125,7 @@ export default {
 If you need to dispatch multiple actions in one method (or want to assign different names), use the object notation:
 
 ```javascript
-import { mapActions } from 're-vue'
+import { mapActions } from 'redux-vuex'
 
 export default {
   name: 'My Vue component',
@@ -144,7 +144,7 @@ export default {
 If you need to define your own methods, you still can use the spread operator:
 
 ```javascript
-import { mapActions } from 're-vue'
+import { mapActions } from 'redux-vuex'
 
 export default {
   name: 'My Vue component',
