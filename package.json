@@ -1,0 +1,16 @@
+{
+  "name": "re-vue",
+  "version": "0.1.0",
+  "description": "Redux bindings for VueJS inspired by Vuex.",
+  "main": "index.js",
+  "keywords": ["vue", "vuejs", "redux", "vuex", "bindings"],
+  "author": "Alexander Heimbuch <npm@heimbu.ch>",
+  "license": "MIT",
+  "dependencies": {
+    "get-value": "^3.0.1",
+    "set-value": "^3.0.0"
+  },
+  "devDependencies": {
+    "vue": "^2.5.16"
+  }
+}
