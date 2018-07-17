@@ -7,7 +7,7 @@ const defaultAction = action => function (...args) {
 }
 
 const customAction = fn => function (...args) {
-  fn.apply(this, [Object.assign({}, this.store, { actions: this.$$actions }), ...args])
+  return fn.apply(this, [Object.assign({}, this.store, { actions: this.$$actions }), ...args])
 }
 
 const simpleActions = actions =>
