@@ -1,17 +1,29 @@
 {
   "name": "redux-vuex",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Redux bindings for VueJS inspired by Vuex.",
-  "main": "index.js",
-  "keywords": ["vue", "vuejs", "redux", "vuex", "bindings"],
+  "main": "dist/redux-vuex.js",
+  "keywords": [
+    "vue",
+    "vuejs",
+    "redux",
+    "vuex",
+    "bindings"
+  ],
+  "module": "src/index.js",
   "author": "Alexander Heimbuch <github@heimbu.ch>",
   "repository": "git@github.com:alexander-heimbuch/redux-vuex.git",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
   "dependencies": {
     "get-value": "^3.0.1",
     "set-value": "^3.0.0"
   },
   "devDependencies": {
-    "vue": "^2.5.16"
+    "vue": "^2.5.16",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   }
 }
