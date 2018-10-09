@@ -21,7 +21,7 @@ export const connect = ({ Vue, store, actions = {} }) => {
       this.store = store
       this.$$actions = actions
 
-      this.mapState = (...props) => mapState(props).call(this)
+      this.mapState = (...props) => mapState(...props).call(this)
     },
     created () {
       // Root component should not interact with the store

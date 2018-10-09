@@ -81,10 +81,10 @@ export default {
   name: 'My Vue Component',
   data () {
     return {
-      baz: 10
+      baz: 10,
       ...this.mapState({
-        baz: function (state) {
-          return state.bar + this.baz //maps state.bar + 10 to data.baz
+        foo: function (state) {
+          return state.bar + this.baz //maps state.bar + 10 to data.foo
         }
       })
     }
