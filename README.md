@@ -83,9 +83,7 @@ export default {
     return {
       baz: 10,
       ...this.mapState({
-        foo: function (state) {
-          return state.bar + this.baz //maps state.bar + 10 to data.foo
-        }
+        foo: 'bar' //maps state.bar to data.foo
       })
     }
   }
