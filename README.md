@@ -5,9 +5,9 @@
 
 ### Why don't you use vuex instead?
 
-Redux and vuex are really hard to compare. Vuex is a state management pattern that clearly defines each subject of the state lifecycle. For most of the projects this helps a lot structuring your application but it also leaves a large architectural footprint.
+Redux and vuex are really hard to compare. Vuex is a state management pattern that clearly defines each subject of the state lifecycle. For most ot the projects this helps a lot structuring your application but it also leaves a large architectural footprint.
 
-Redux on the other hand is very adaptable to different scenarios giving you the ability to customize everything around state management like handling side effects (see [redux-effects](https://github.com/redux-effects/redux-effects), [redux-saga](https://github.com/redux-saga/redux-saga) or [redux-thunk](https://github.com/reduxjs/redux-thunk)) or even adapting full application flows like [rematch](https://github.com/rematch/rematch).
+Redux on the other hand is very adaptable to different scenarios giving you the ability to customize everything around state management like handlung side effects (see [redux-effects](https://github.com/redux-effects/redux-effects), [redux-saga](https://github.com/redux-saga/redux-saga) or [redux-thunk](https://github.com/reduxjs/redux-thunk)) or even adapting full application flows like [rematch](https://github.com/rematch/rematch).
 
 ### Yay, yet another redux lib for VueJS
 
@@ -15,13 +15,11 @@ Valid point, it seems the needs for integrating with redux is strong. So dependi
 
 * [vuejs-redux](https://github.com/titouancreach/vuejs-redux) if you want provider bindings like react-redux
 * [vdeux](https://gitlab.com/citygro/vdeux) if you want a different kind of component bindings
-* [revue](https://yarnpkg.com/en/package/revue) also nice for store bindings but unfortunately it's dead :(
+* [revue](https://yarnpkg.com/en/package/revue) also for nice store bindings but unfortunately its dead :(
 
 ## Installation
 
 `redux-vuex` is written in pure es6 and only has dependencies to the beautiful crafted packages [get-value](https://github.com/jonschlinkert/get-value) and [set-value](https://github.com/jonschlinkert/set-value)
-
-You can get the library as pure es6 modules as well in a UMD format.
 
 ### Get the Package
 
@@ -85,9 +83,7 @@ export default {
     return {
       baz: 10,
       ...this.mapState({
-        foo: function (state) {
-          return state.bar + this.baz //maps state.bar + 10 to data.foo
-        }
+        foo: 'bar' //maps state.bar to data.foo
       })
     }
   }
