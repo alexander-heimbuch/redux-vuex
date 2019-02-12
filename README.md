@@ -5,9 +5,9 @@
 
 ### Why don't you use vuex instead?
 
-Redux and vuex are really hard to compare. Vuex is a state management pattern that clearly defines each subject of the state lifecycle. For most ot the projects this helps a lot structuring your application but it also leaves a large architectural footprint.
+Redux and vuex are really hard to compare. Vuex is a state management pattern that clearly defines each subject of the state lifecycle. For most of the projects this helps a lot structuring your application but it also leaves a large architectural footprint.
 
-Redux on the other hand is very adaptable to different scenarios giving you the ability to customize everything around state management like handlung side effects (see [redux-effects](https://github.com/redux-effects/redux-effects), [redux-saga](https://github.com/redux-saga/redux-saga) or [redux-thunk](https://github.com/reduxjs/redux-thunk)) or even adapting full application flows like [rematch](https://github.com/rematch/rematch).
+Redux on the other hand is very adaptable to different scenarios giving you the ability to customize everything around state management like handling side effects (see [redux-effects](https://github.com/redux-effects/redux-effects), [redux-saga](https://github.com/redux-saga/redux-saga) or [redux-thunk](https://github.com/reduxjs/redux-thunk)) or even adapting full application flows like [rematch](https://github.com/rematch/rematch).
 
 ### Yay, yet another redux lib for VueJS
 
