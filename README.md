@@ -93,7 +93,7 @@ import { mapState } from "redux-vuex";
 export default {
   name: "My Vue Component",
   data: mapState({
-    currentState: state => ({ todoList: state.todos, users: state.users }) // maps state.bar to data.bar
+    state: state => ({ todoList: state.todos, users: state.users }) // maps state.todos to data.state.todoList and state.users to data.state.users
   })
 };
 ```
