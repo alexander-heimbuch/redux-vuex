@@ -42,7 +42,8 @@ const store = createStore(reducers);
 connect({
   Vue,
   store,
-  actions // optional
+  actions, // optional
+  binding // optional: public store binding on vue instance (by default 'store')
 });
 ```
 
@@ -217,7 +218,7 @@ export default {
 
 ## How it works
 
-- `mapState` creates a state binding on the component called `$$bindings`
+- `mapState` creates a state binding on the component called `REDUX_VUEX_BINDINGS`
 - Each Vue Component with bindings creates a store subscription
 - On each state change all bindings are evaluated and update the assigned data attributes
 - Only the mapped properties are retrieved from store and setted
