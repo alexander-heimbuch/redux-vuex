@@ -3,7 +3,7 @@ const defaultAction = action => function (...args) {
     return
   }
 
-  this.store.dispatch(this.$$actions[action].apply(this, args))
+  return this.store.dispatch(this.$$actions[action].apply(this, args))
 }
 
 const customAction = fn => function (...args) {
