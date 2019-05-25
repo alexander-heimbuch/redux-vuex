@@ -1,7 +1,12 @@
 import set from 'set-value'
 import mapState from './map-state'
 
-export const connect = ({ Vue, store, actions = {} }) => {
+export const connect = ({ Vue, store, actions = {}, binding = 'store' }) => {
+  if (!store) {
+    console.warn(`[redux-vuex]: No store attatched, please provide an redux-store to the connector`)
+    return
+  }
+
   const syncStateWithComponent = (component, bindings) => () => {
     const state = store.getState()
 
@@ -18,8 +23,15 @@ export const connect = ({ Vue, store, actions = {} }) => {
 
   Vue.mixin({
     beforeCreate () {
-      this.store = store
-      this.$$actions = actions
+      this.REDUX_VUEX_STORE = binding
+
+      if (!this[this.REDUX_VUEX_STORE]) {
+        this[this.REDUX_VUEX_STORE] = store
+      }
+
+      if (!this.REDUX_VUEX_ACTIONS) {
+        this.REDUX_VUEX_ACTIONS = actions
+      }
 
       this.mapState = (...props) => mapState(...props).call(this)
     },
@@ -30,9 +42,9 @@ export const connect = ({ Vue, store, actions = {} }) => {
       }
 
       // If the helper methods (mapState) registered store bindings, create subscriptions
-      if (this.$$bindings) {
+      if (this.REDUX_VUEX_BINDINGS) {
         this.unsubscribe = store.subscribe(
-          syncStateWithComponent(this, this.$$bindings)
+          syncStateWithComponent(this, this.REDUX_VUEX_BINDINGS)
         )
       }
     },

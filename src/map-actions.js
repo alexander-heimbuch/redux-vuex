@@ -1,13 +1,13 @@
 const defaultAction = action => function (...args) {
-  if (!this.$$actions[action]) {
+  if (!this.REDUX_VUEX_ACTIONS[action]) {
     return
   }
 
-  return this.store.dispatch(this.$$actions[action].apply(this, args))
+  return this[this.REDUX_VUEX_STORE].dispatch(this.REDUX_VUEX_ACTIONS[action].apply(this, args))
 }
 
 const customAction = fn => function (...args) {
-  return fn.apply(this, [Object.assign({}, this.store, { actions: this.$$actions }), ...args])
+  return fn.apply(this, [Object.assign({}, this[this.REDUX_VUEX_STORE], { actions: this.REDUX_VUEX_ACTIONS }), ...args])
 }
 
 const simpleActions = actions =>

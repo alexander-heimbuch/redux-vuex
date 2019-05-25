@@ -4,11 +4,11 @@ const defaultGetter = prop => state => get(state, prop)
 
 const simpleMappers = (props, getter) => function () {
   const slices = [].concat.apply([], props)
-  const state = this.store.getState()
+  const state = this[this.REDUX_VUEX_STORE].getState()
 
-  this.$$bindings = slices.reduce((result, prop) => Object.assign({}, result, {
+  this.REDUX_VUEX_BINDINGS = slices.reduce((result, prop) => Object.assign({}, result, {
     [prop]: getter(prop)
-  }), this.$$bindings || {})
+  }), this.REDUX_VUEX_BINDINGS || {})
 
   return slices.reduce((result, prop) => Object.assign({}, result, {
     [prop]: getter(prop)(state)
@@ -17,11 +17,11 @@ const simpleMappers = (props, getter) => function () {
 
 const objectMappers = (obj, fallbackGetter) => function () {
   const slices = Object.keys(obj)
-  const state = this.store.getState()
+  const state = this[this.REDUX_VUEX_STORE].getState()
 
-  this.$$bindings = slices.reduce((result, prop) => Object.assign({}, result, {
+  this.REDUX_VUEX_BINDINGS = slices.reduce((result, prop) => Object.assign({}, result, {
     [prop]: typeof obj[prop] === 'function' ? obj[prop].bind(this) : fallbackGetter(obj[prop])
-  }), this.$$bindings || {})
+  }), this.REDUX_VUEX_BINDINGS || {})
 
   return slices.reduce((result, prop) => Object.assign({}, result, {
     [prop]: typeof obj[prop] === 'function' ?
