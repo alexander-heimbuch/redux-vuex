@@ -9,5 +9,28 @@ module.exports = {
     filename: 'redux-vuex.js',
     library: 'redux-vuex',
     libraryTarget: 'umd'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              [
+                '@babel/env',
+                {
+                  targets: {
+                    browsers: ['> 0.25%', 'not dead']
+                  }
+                }
+              ]
+            ]
+          }
+        }
+      }
+    ]
   }
 }
