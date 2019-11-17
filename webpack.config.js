@@ -6,9 +6,8 @@ module.exports = {
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'redux-vuex.js',
-    library: 'redux-vuex',
-    libraryTarget: 'umd'
+    filename: 'index.js',
+    libraryTarget: 'commonjs2'
   },
   module: {
     rules: [
@@ -18,19 +17,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              [
-                '@babel/env',
-                {
-                  targets: {
-                    browsers: ['> 0.25%', 'not dead']
-                  }
-                }
-              ]
-            ],
+            presets: ['@babel/preset-env'],
             plugins: [
-              '@babel/plugin-proposal-object-rest-spread',
-              '@babel/plugin-transform-runtime'
+              '@babel/plugin-proposal-object-rest-spread'
             ]
           }
         }
