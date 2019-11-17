@@ -1,6 +1,6 @@
 {
   "name": "redux-vuex",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Redux bindings for VueJS inspired by Vuex.",
   "main": "dist/redux-vuex.js",
   "keywords": [
@@ -22,8 +22,11 @@
     "set-value": "3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "7.6.4",
-    "@babel/preset-env": "7.6.3",
+    "@babel/core": "7.7.2",
+    "@babel/runtime": "7.7.2",
+    "@babel/preset-env": "7.7.1",
+    "@babel/plugin-proposal-object-rest-spread": "7.6.2",
+    "@babel/plugin-transform-runtime": "7.6.2",
     "babel-loader": "8.0.6",
     "vue": "2.6.10",
     "webpack": "4.41.2",
