@@ -31,20 +31,19 @@ npm i redux-vuex // yarn add redux-vuex
 ### Connect it to your Vue application
 
 ```javascript
-import Vue from "vue";
-import { createStore } from "redux";
-import { connect } from "redux-vuex";
+import Vue from 'vue'
+import { createStore } from 'redux'
+import { connect } from 'redux-vuex'
 
-import { reducers, actions } from "./store";
+import { reducers, actions } from './store'
 
-const store = createStore(reducers);
+const store = createStore(reducers)
 
 connect({
   Vue,
   store,
-  actions, // optional
-  binding // optional: public store binding on vue instance (by default 'store')
-});
+  actions // optional
+})
 ```
 
 ## Usage
@@ -60,12 +59,12 @@ To assign state with ease to your component `mapState` needs to be used. It has 
 If you want a 1:1 relationship between your redux store's state property names and your vue component's data then pass the names of these properties from redux as string arguments to `mapState`:
 
 ```javascript
-import { mapState } from "redux-vuex";
+import { mapState } from 'redux-vuex'
 
 export default {
-  name: "My Vue Component",
-  data: mapState("users", "todos") // maps state.users and state.todos to data.users and data.todos
-};
+  name: 'My Vue Component',
+  data: mapState('users', 'todos') // maps state.users and state.todos to data.users and data.todos
+}
 ```
 
 #### Custom `data` property names
@@ -73,15 +72,15 @@ export default {
 Alternatively, if you provide an object to mapState you can specify data property names.
 
 ```javascript
-import { mapState } from "redux-vuex";
+import { mapState } from 'redux-vuex'
 
 export default {
-  name: "My Vue Component",
+  name: 'My Vue Component',
   data: mapState({
-    users: "users", // maps state.users to data.users
-    todoList: "todos" // maps state.todos to data.todoList
+    users: 'users', // maps state.users to data.users
+    todoList: 'todos' // maps state.todos to data.todoList
   })
-};
+}
 ```
 
 #### Single property on data
@@ -89,28 +88,28 @@ export default {
 You can pass a function that has access to the state object if you want to
 
 ```javascript
-import { mapState } from "redux-vuex";
+import { mapState } from 'redux-vuex'
 
 export default {
-  name: "My Vue Component",
+  name: 'My Vue Component',
   data: mapState({
-    state: state => ({ todoList: state.todos, users: state.users }) // maps state.todos to data.state.todoList and state.users to data.state.users
+    state: (state) => ({ todoList: state.todos, users: state.users }) // maps state.todos to data.state.todoList and state.users to data.state.users
   })
-};
+}
 ```
 
 You can use the last two methods together like so
 
 ```javascript
-import { mapState } from "redux-vuex";
+import { mapState } from 'redux-vuex'
 
 export default {
-  name: "My Vue Component",
+  name: 'My Vue Component',
   data: mapState({
-    users: "users", // maps state.users to data.users
-    todoList: state => state.todos // maps state.todos to data.todoList
+    users: 'users', // maps state.users to data.users
+    todoList: (state) => state.todos // maps state.todos to data.todoList
   })
-};
+}
 ```
 
 #### Additional Data Attributes
@@ -119,16 +118,16 @@ In case you need to define additional data attributes outside of redux you need 
 
 ```javascript
 export default {
-  name: "My Vue Component",
+  name: 'My Vue Component',
   data() {
     return {
       outsideOfRedux: true,
       ...this.mapState({
-        todoList: "todos" //maps state.todos to data.todoList
+        todoList: 'todos' //maps state.todos to data.todoList
       })
-    };
+    }
   }
-};
+}
 ```
 
 Note: using the object notation gives you the ability to use [store selectors](https://github.com/reduxjs/redux/blob/b3f1c1699293ee7d0f185c24ea45957ff865bfca/examples/shopping-cart/reducers/index.js#L10-L37).
@@ -150,50 +149,50 @@ const actions = {
 ```
 
 ```javascript
-import { mapActions } from "redux-vuex";
+import { mapActions } from 'redux-vuex'
 
 export default {
-  name: "My Vue component",
-  methods: mapActions("foo", "bar"), // creates scoped functions for foo and bar action
+  name: 'My Vue component',
+  methods: mapActions('foo', 'bar'), // creates scoped functions for foo and bar action
   mounted() {
-    this.foo("baz"); // will dispatch { type: 'FOO', payload: 'baz' }
+    this.foo('baz') // will dispatch { type: 'FOO', payload: 'baz' }
   }
-};
+}
 ```
 
 If you need to dispatch multiple actions in one method (or want to assign different names), use the object notation:
 
 ```javascript
-import { mapActions } from "redux-vuex";
+import { mapActions } from 'redux-vuex'
 
 export default {
-  name: "My Vue component",
+  name: 'My Vue component',
   methods: mapActions({
     baz: ({ dispatch, actions }, arg1, arg2) => {
-      dispatch(actions.foo(arg2));
-      dispatch(actions.bar());
+      dispatch(actions.foo(arg2))
+      dispatch(actions.bar())
     }
   }),
   mounted() {
-    this.baz("foo", "bar"); // will dispatch foo and bar actions
+    this.baz('foo', 'bar') // will dispatch foo and bar actions
   }
-};
+}
 ```
 
 If you need to define your own methods, you still can use the spread operator:
 
 ```javascript
-import { mapActions } from "redux-vuex";
+import { mapActions } from 'redux-vuex'
 
 export default {
-  name: "My Vue component",
+  name: 'My Vue component',
   methods: {
-    ...mapActions("baz"),
+    ...mapActions('baz'),
     foo() {
       // do something
     }
   }
-};
+}
 ```
 
 ### store
@@ -202,18 +201,18 @@ Finally, if you need direct access to the store, each component has a binding to
 
 ```javascript
 export default {
-  name: "My Vue component",
+  name: 'My Vue component',
   mounted() {
     this.store.subscribe(() => {
-      console.log(this.store.getState());
-    });
+      console.log(this.store.getState())
+    })
 
     this.store.dispatch({
-      type: "foo",
-      payload: "bar"
-    });
+      type: 'foo',
+      payload: 'bar'
+    })
   }
-};
+}
 ```
 
 ## How it works
