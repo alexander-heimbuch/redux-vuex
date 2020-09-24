@@ -1,6 +1,6 @@
 {
   "name": "redux-vuex",
-  "version": "3.0.0-beta",
+  "version": "3.0.0-beta.1",
   "description": "Redux bindings for VueJS inspired by Vuex.",
   "main": "dist/index.js",
   "keywords": [

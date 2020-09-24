@@ -2,6 +2,8 @@
 
 [Redux](https://github.com/reduxjs/redux) bindings for [VueJS](https://github.com/vuejs/vue) inspired by [Vuex](https://github.com/vuejs/vuex).
 
+## 👉 [For the old Vue 2 version check out the legacy branch](https://github.com/alexander-heimbuch/redux-vuex/tree/legacy) 👈
+
 ## First things first
 
 ### Why don't you use vuex instead?
@@ -31,19 +33,21 @@ npm i redux-vuex // yarn add redux-vuex
 ### Connect it to your Vue application
 
 ```javascript
-import Vue from 'vue'
-import { createStore } from 'redux'
-import { connect } from 'redux-vuex'
+import { createApp } from 'vue'
+import { provideStore } from 'redux-vuex'
 
-import { reducers, actions } from './store'
+import App from './App.vue'
+import { store, actions } from './store'
 
-const store = createStore(reducers)
+const app = createApp(App)
 
-connect({
-  Vue,
+provideStore({
+  app,
   store,
-  actions // optional
+  actions
 })
+
+app.mount('#app')
 ```
 
 ## Usage
@@ -63,11 +67,13 @@ import { mapState } from 'redux-vuex'
 
 export default {
   name: 'My Vue Component',
-  data: mapState('users', 'todos') // maps state.users and state.todos to data.users and data.todos
+  setup() {
+    return mapState('users', 'todos') // maps state.users and state.todos to data.users and data.todos
+  }
 }
 ```
 
-#### Custom `data` property names
+#### Custom property names
 
 Alternatively, if you provide an object to mapState you can specify data property names.
 
@@ -76,14 +82,16 @@ import { mapState } from 'redux-vuex'
 
 export default {
   name: 'My Vue Component',
-  data: mapState({
-    users: 'users', // maps state.users to data.users
-    todoList: 'todos' // maps state.todos to data.todoList
-  })
+  setup() {
+    return mapState({
+      users: 'users', // maps state.users to data.users
+      todoList: 'todos' // maps state.todos to data.todoList
+    })
+  }
 }
 ```
 
-#### Single property on data
+#### Single property
 
 You can pass a function that has access to the state object if you want to
 
@@ -92,9 +100,11 @@ import { mapState } from 'redux-vuex'
 
 export default {
   name: 'My Vue Component',
-  data: mapState({
-    state: (state) => ({ todoList: state.todos, users: state.users }) // maps state.todos to data.state.todoList and state.users to data.state.users
-  })
+  setup() {
+    return mapState({
+      state: (state) => ({ todoList: state.todos, users: state.users }) // maps state.todos to data.state.todoList and state.users to data.state.users
+    })
+  }
 }
 ```
 
@@ -105,27 +115,11 @@ import { mapState } from 'redux-vuex'
 
 export default {
   name: 'My Vue Component',
-  data: mapState({
-    users: 'users', // maps state.users to data.users
-    todoList: (state) => state.todos // maps state.todos to data.todoList
-  })
-}
-```
-
-#### Additional Data Attributes
-
-In case you need to define additional data attributes outside of redux you need to use the component pre bound `mapState`:
-
-```javascript
-export default {
-  name: 'My Vue Component',
-  data() {
-    return {
-      outsideOfRedux: true,
-      ...this.mapState({
-        todoList: 'todos' //maps state.todos to data.todoList
-      })
-    }
+  setup() {
+    return mapState({
+      users: 'users', // maps state.users to data.users
+      todoList: (state) => state.todos // maps state.todos to data.todoList
+    })
   }
 }
 ```
@@ -153,7 +147,9 @@ import { mapActions } from 'redux-vuex'
 
 export default {
   name: 'My Vue component',
-  methods: mapActions('foo', 'bar'), // creates scoped functions for foo and bar action
+  setup() {
+    return mapActions('foo', 'bar') // creates scoped functions for foo and bar action
+  }
   mounted() {
     this.foo('baz') // will dispatch { type: 'FOO', payload: 'baz' }
   }
@@ -167,30 +163,16 @@ import { mapActions } from 'redux-vuex'
 
 export default {
   name: 'My Vue component',
-  methods: mapActions({
-    baz: ({ dispatch, actions }, arg1, arg2) => {
-      dispatch(actions.foo(arg2))
-      dispatch(actions.bar())
-    }
-  }),
+  setup() {
+     return mapActions({
+        baz: ({ dispatch, actions }, arg1, arg2) => {
+          dispatch(actions.foo(arg2))
+          dispatch(actions.bar())
+        }
+     })
+  }
   mounted() {
     this.baz('foo', 'bar') // will dispatch foo and bar actions
-  }
-}
-```
-
-If you need to define your own methods, you still can use the spread operator:
-
-```javascript
-import { mapActions } from 'redux-vuex'
-
-export default {
-  name: 'My Vue component',
-  methods: {
-    ...mapActions('baz'),
-    foo() {
-      // do something
-    }
   }
 }
 ```
@@ -200,14 +182,19 @@ export default {
 Finally, if you need direct access to the store, each component has a binding to the store assigned:
 
 ```javascript
+import { inject } from 'vue'
+import { store as storeToken } from 'redux-vuex'
+
 export default {
   name: 'My Vue component',
-  mounted() {
-    this.store.subscribe(() => {
-      console.log(this.store.getState())
+  setup() {
+    const store = inject(storeToken)
+
+    store.subscribe(() => {
+      console.log(store.getState())
     })
 
-    this.store.dispatch({
+    store.dispatch({
       type: 'foo',
       payload: 'bar'
     })
@@ -215,17 +202,34 @@ export default {
 }
 ```
 
+### Caveats
+
+If you return more than the `mapState` from the setup make sure to bind the result to a dedicated property. Otherwise the Vue proxies won't work 😑
+
+```javascript
+import { mapState } from 'redux-vuex'
+
+export default {
+  name: 'My Vue Component',
+  setup() {
+    return {
+      state: mapState({
+        users: 'users', // maps state.users to data.users
+        todoList: (state) => state.todos // maps state.todos to data.todoList
+      }),
+      ...mapActions('foo', 'bar')
+    }
+  }
+}
+```
+
 ## How it works
 
-- `mapState` creates a state binding on the component called `REDUX_VUEX_BINDINGS`
+- `provideStore` provides the redux store for composable components
+- `mapState` creates a reference binding form the redux store
 - Each Vue Component with bindings creates a store subscription
-- On each state change all bindings are evaluated and update the assigned data attributes
+- On each state change all bindings are evaluated and update
 - Only the mapped properties are retrieved from store and setted
-
-## Caveats
-
-- Can't use computed values like in vuex, vuex can bind to it's reactive state, for redux that's not efficiently possible
-- Accessing other mapped values in custom getters does not work on initial cycle
 
 ## License
 
