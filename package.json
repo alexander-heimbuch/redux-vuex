@@ -14,7 +14,8 @@
   "repository": "git@github.com:alexander-heimbuch/redux-vuex.git",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist && webpack"
+    "build": "rm -rf dist && webpack",
+    "test": "jest \"__tests__/.*\\.test\\.ts\""
   },
   "dependencies": {
     "get-value": "3.0.1"
@@ -25,24 +26,40 @@
     "@vue/runtime-core": "3.x"
   },
   "devDependencies": {
-    "prettier": "2.1.2",
     "@babel/core": "7.11.6",
     "@babel/preset-env": "7.11.5",
     "@babel/runtime": "7.11.2",
+    "@vue/runtime-core": "3.0.0",
+    "@vue/test-utils": "2.0.0-beta.5",
     "husky": "4.3.0",
+    "jest": "26.4.2",
+    "prettier": "2.1.2",
     "pretty-quick": "3.0.2",
     "redux": "4.0.5",
+    "release-it": "14.0.3",
+    "ts-jest": "^26.4.0",
     "ts-loader": "8.0.4",
     "typescript": "4.0.3",
     "vue": "3.0.0",
     "webpack": "4.44.2",
     "webpack-cli": "3.3.12",
-    "release-it": "14.0.3",
-    "@vue/runtime-core": "3.0.0"
+    "@types/get-value": "3.0.0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "json"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "",
+    "testURL": "http://localhost/"
   }
 }

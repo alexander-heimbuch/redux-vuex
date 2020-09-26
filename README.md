@@ -183,12 +183,13 @@ Finally, if you need direct access to the store, each component has a binding to
 
 ```javascript
 import { inject } from 'vue'
-import { store as storeToken } from 'redux-vuex'
+import { injectStore, injectActions } from 'redux-vuex'
 
 export default {
   name: 'My Vue component',
   setup() {
-    const store = inject(storeToken)
+    const store = injectStore()
+    const actions = injectActions()
 
     store.subscribe(() => {
       console.log(store.getState())

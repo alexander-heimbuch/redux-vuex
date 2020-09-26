@@ -19,9 +19,10 @@ export const objectMapper = (props: MapOptions): PropertyMappers => {
 
   const args = props as string[]
   /**
-   * mapState(['foo', 'bar', 'baz']) \\ mapState('foo', 'bar', 'baz')
+   * mapState(['foo', 'bar', 'baz'])
    */
-  return [].concat(args).reduce(
+
+  return [].concat.apply([], args).reduce(
     (result, prop) => ({
       ...result,
       [prop]: prop
@@ -30,10 +31,7 @@ export const objectMapper = (props: MapOptions): PropertyMappers => {
   )
 }
 
-export const applyMappers = (
-  mappers: Mappers,
-  modifier: (key: string, value: string | Function) => any
-) =>
+export const applyMappers = (mappers: Mappers, modifier: (key: string, value: any) => any) =>
   Object.keys(mappers).reduce((result, key) => {
     const value = mappers[key]
     return {

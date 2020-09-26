@@ -1,28 +1,25 @@
-import { inject } from '@vue/runtime-core'
-import { Store } from 'redux'
-
 import { objectMapper, applyMappers } from './helper'
 
-import { MapOptions, Actions } from './types'
-import { storeToken, actionsToken } from './tokens'
+import { MapOptions } from './types'
+import { injectStore, injectActions } from './tokens'
 
 export function mapActions(...args: MapOptions) {
-  const reduxStore = inject(storeToken) as Store
-  const actions = inject(actionsToken) as Actions
+  const store = injectStore()
+  const actions = injectActions()
 
   const defaultAction = (key: string) => {
     const action = actions[key]
 
     if (!action) {
-      console.warn(`[redux-vuex] action ${action} is not defined`)
+      console.warn(`[redux-vuex] action ${key} is not defined`)
       return
     }
 
-    return (...args: any[]) => reduxStore.dispatch(action(...args))
+    return (...args: any[]) => store.dispatch(action(...args))
   }
 
   const customAction = (fn: Function) => (...args: any[]) => {
-    fn.apply(null, [Object.assign({}, reduxStore, { actions }), ...args])
+    fn.apply(null, [Object.assign({}, store, { actions }), ...args])
   }
 
   const mappers = objectMapper(args)

@@ -1,15 +1,14 @@
-import get from 'get-value'
-import { Store } from 'redux'
-import { inject, reactive, ref, UnwrapRef, onUnmounted } from '@vue/runtime-core'
+import * as get from 'get-value'
+import { reactive, ref, UnwrapRef, onUnmounted } from '@vue/runtime-core'
 
-import { storeToken } from './tokens'
+import { injectStore } from './tokens'
 import { objectMapper, applyMappers } from './helper'
 import { MapOptions, PropertyMappers } from './types'
 
 export function mapState(...args: MapOptions) {
   const defaultGetter = (prop: string) => (state: { [key: string]: any }) => get(state, prop)
 
-  const store = inject(storeToken) as Store
+  const store = injectStore()
 
   const mappers = objectMapper(args)
   const getters: PropertyMappers = applyMappers(mappers, (_, value) =>

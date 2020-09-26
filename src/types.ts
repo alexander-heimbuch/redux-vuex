@@ -15,8 +15,7 @@ export interface Actions {
   [key: string]: Function
 }
 
-export type MapOptions = [Mappers] | string[]
-
+export type MapOptions = [Mappers] | string[] | string[][]
 export interface PropertyMappers {
   [key: string]: Function
 }
