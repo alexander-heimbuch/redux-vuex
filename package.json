@@ -15,7 +15,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && webpack",
-    "test": "jest \"__tests__/.*\\.test\\.ts\""
+    "test": "jest \"__tests__/.*\\.test\\.ts\"",
+    "release": "release-it"
   },
   "dependencies": {
     "get-value": "3.0.1"
@@ -61,5 +62,21 @@
     },
     "testRegex": "",
     "testURL": "http://localhost/"
+  },
+  "release-it": {
+    "hooks": {
+      "before:init": [
+        "npm test"
+      ],
+      "after:bump": [
+        "npm run build"
+      ]
+    },
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    }
   }
 }
