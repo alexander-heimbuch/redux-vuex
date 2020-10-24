@@ -27,7 +27,7 @@ Valid point, it seems the needs for integrating with redux is strong. So dependi
 ### Get the Package
 
 ```
-npm i redux-vuex // yarn add redux-vuex
+npm i redux-vuex@next // yarn add redux-vuex
 ```
 
 ### Connect it to your Vue application
