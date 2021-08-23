@@ -1,8 +1,7 @@
 {
   "name": "redux-vuex",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "description": "Redux bindings for VueJS inspired by Vuex.",
-  "main": "dist/index.js",
   "keywords": [
     "vue",
     "vuejs",
@@ -14,12 +13,13 @@
   "repository": "git@github.com:alexander-heimbuch/redux-vuex.git",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist && webpack",
+    "build": "rm -rf dist && webpack && node ./.build/prepublish.js",
     "test": "jest \"__tests__/.*\\.test\\.ts\"",
     "release": "release-it"
   },
   "dependencies": {
-    "get-value": "3.0.1"
+    "get-value": "3.0.1",
+    "set-value": "3.0.1"
   },
   "peerDependencies": {
     "vue": "3.x",
@@ -36,15 +36,17 @@
     "jest": "26.4.2",
     "prettier": "2.1.2",
     "pretty-quick": "3.0.2",
-    "redux": "4.0.5",
-    "release-it": "14.0.3",
+    "redux": "4.1.1",
+    "release-it": "14.11.5",
     "ts-jest": "^26.4.0",
     "ts-loader": "8.0.4",
     "typescript": "4.0.3",
     "vue": "3.0.0",
     "webpack": "4.44.2",
     "webpack-cli": "3.3.12",
-    "@types/get-value": "3.0.0"
+    "@types/get-value": "3.0.0",
+    "fs-extra": "10.0.0",
+    "ramda": "0.27.1"
   },
   "husky": {
     "hooks": {
@@ -71,6 +73,9 @@
       "after:bump": [
         "npm run build"
       ]
+    },
+    "npm": {
+      "publishPath": "./dist"
     },
     "git": {
       "commitMessage": "chore: release v${version}"
