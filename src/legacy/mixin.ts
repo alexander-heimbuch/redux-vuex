@@ -46,7 +46,7 @@ export const connect = ({ app, store, actions = {}, binding = 'store' }) => {
         this.unsubscribe = store.subscribe(syncStateWithComponent(this, this.REDUX_VUEX_BINDINGS))
       }
     },
-    beforeDestroy() {
+    beforeUnmount() {
       this.unsubscribe && this.unsubscribe()
     }
   })
