@@ -17,7 +17,7 @@ export const connect = ({ app, store, actions = {}, binding = 'store' }) => {
         return
       }
 
-      set(component._data, prop, getter(state))
+      set(component._.data, prop, getter(state))
     })
   }
 
