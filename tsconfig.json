@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2015",
     "declaration": true,
-    "outDir": "./dist"
+    "outDir": "./dist/typings",
+    "emitDeclarationOnly": true
   },
-  "include": ["src/**/*"]
+  "include": ["./src/index.ts"]
 }
