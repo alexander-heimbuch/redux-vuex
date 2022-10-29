@@ -1,4 +1,4 @@
-import get from 'get-value'
+import * as get from 'get-value'
 import { ref, UnwrapRef, onUnmounted, reactive } from 'vue'
 
 import { injectStore } from './tokens'
