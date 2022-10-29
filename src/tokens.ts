@@ -1,5 +1,5 @@
 import { Store, createStore, combineReducers } from 'redux'
-import { inject, provide, App } from '@vue/runtime-core'
+import { inject, provide, App } from 'vue'
 import { Actions } from './types'
 
 export const storeToken = Symbol('ReduxStore')

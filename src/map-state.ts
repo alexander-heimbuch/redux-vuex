@@ -1,5 +1,5 @@
 import * as get from 'get-value'
-import { ref, UnwrapRef, onUnmounted, reactive } from '@vue/runtime-core'
+import { ref, UnwrapRef, onUnmounted, reactive } from 'vue'
 
 import { injectStore } from './tokens'
 import { objectMapper, applyMappers } from './helper'
