@@ -2,8 +2,8 @@ import { Store, createStore, combineReducers } from 'redux'
 import { inject, provide, App } from 'vue'
 import { Actions } from './types'
 
-export const storeToken = Symbol('ReduxStore')
-export const actionsToken = Symbol('ReduxActions')
+export const storeToken = '$ReduxVuexStoreToken$'
+export const actionsToken = '$ReduxVuexActionsToken$'
 
 export const provideStore = (store: Store, app?: App<any>) => {
   if (!store) {
