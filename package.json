@@ -33,7 +33,8 @@
   "types": "./dist/typings/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/redux-vuex.es.js"
+      "import": "./dist/redux-vuex.es.js",
+      "types": "./dist/typings/index.d.ts"
     }
   },
   "devDependencies": {
