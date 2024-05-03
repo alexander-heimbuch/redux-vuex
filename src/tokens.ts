@@ -1,6 +1,6 @@
 import { Store, createStore, combineReducers } from 'redux'
 import { inject, provide, App } from 'vue'
-import { Actions } from './types'
+import { Actions } from './types.js'
 
 export const storeToken = '$ReduxVuexStoreToken$'
 export const actionsToken = '$ReduxVuexActionsToken$'

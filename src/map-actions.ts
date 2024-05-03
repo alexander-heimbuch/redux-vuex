@@ -1,7 +1,7 @@
-import { objectMapper, applyMappers } from './helper'
+import { objectMapper, applyMappers } from './helper.js'
 
-import { MapOptions } from './types'
-import { injectStore, injectActions } from './tokens'
+import { MapOptions } from './types.js'
+import { injectStore, injectActions } from './tokens.js'
 
 export function mapActions(...args: MapOptions) {
   const store = injectStore()

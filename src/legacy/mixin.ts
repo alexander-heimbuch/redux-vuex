@@ -1,4 +1,4 @@
-import * as set from 'set-value'
+import set from 'set-value'
 import mapState from './map-state'
 
 export const connect = ({ app, store, actions = {}, binding = 'store' }) => {

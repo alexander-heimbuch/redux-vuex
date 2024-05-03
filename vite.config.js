@@ -1,12 +1,13 @@
-const path = require('path');
-const { defineConfig } = require('vite');
-const vue = require('@vitejs/plugin-vue');
+/// <reference types="vitest" />
+import {resolve} from 'node:path';
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   build: {
     lib: {
       formats: ['es'],
-      entry: path.resolve(__dirname, 'src', 'index.ts'),
+      entry: resolve(__dirname, 'src', 'index.ts'),
       name: 'ReduxVuex',
       fileName: (format) => `redux-vuex.${format}.js`,
     },
@@ -14,5 +15,8 @@ export default defineConfig({
       external: ['vue', 'redux']
     },
   },
-  plugins: [vue()]
+  plugins: [vue()],
+  test: {
+    environment: 'happy-dom'
+  },
 });

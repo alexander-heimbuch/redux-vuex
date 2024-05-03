@@ -1,5 +1,5 @@
-import { ProvideStoreOptions } from './types'
-import { provideStore, provideActions } from './tokens'
+import { ProvideStoreOptions } from './types.js'
+import { provideStore, provideActions } from './tokens.js'
 
 export function provide(options: ProvideStoreOptions) {
   provideStore(options.store, options.app)

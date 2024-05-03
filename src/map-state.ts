@@ -1,9 +1,9 @@
-import * as get from 'get-value'
+import get from 'get-value'
 import { ref, UnwrapRef, onUnmounted, reactive } from 'vue'
 
-import { injectStore } from './tokens'
-import { objectMapper, applyMappers } from './helper'
-import { MapOptions, PropertyMappers } from './types'
+import { injectStore } from './tokens.js'
+import { objectMapper, applyMappers } from './helper.js'
+import { MapOptions, PropertyMappers } from './types.js'
 
 export function mapState(...args: MapOptions) {
   const defaultGetter = (prop: string) => (state: { [key: string]: any }) => get(state, prop)

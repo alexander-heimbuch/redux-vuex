@@ -1,4 +1,4 @@
-import { MapOptions, PropertyMappers, Mappers } from './types'
+import { MapOptions, PropertyMappers, Mappers } from './types.js'
 
 export const objectMapper = (props: MapOptions): PropertyMappers => {
   const [obj] = props

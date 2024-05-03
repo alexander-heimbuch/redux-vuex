@@ -1,3 +1,4 @@
+import { describe, beforeEach, test, expect, vi } from 'vitest'
 import { createApp } from 'vue'
 
 import { provide as provideStore } from '../src/provide-store'
@@ -39,31 +40,31 @@ describe('mapActions()', () => {
     expect(methods['addTodo']).toBeDefined()
   })
 
-  test('should fire an action if called', (done) => {
+  test('should fire an action if called', () => new Promise<void>((resolve) => {
     const methods = testSetup('addTodo', 'toggleTodo')
 
     store.subscribe(() => {
       const state: State = store.getState()
       expect(state.todos[0].text).toEqual('TEST')
-      done()
+      resolve()
     })
 
     methods['addTodo']('TEST')
-  })
+  }));
 
-  test('should remap actions', (done) => {
+  test('should remap actions', () => new Promise<void>((resolve) => {
     const methods = testSetup({ foo: 'addTodo', bar: 'toggleTodo' })
 
     store.subscribe(() => {
       const state: State = store.getState()
       expect(state.todos[0].text).toEqual('TEST')
-      done()
+      resolve()
     })
 
     methods['foo']('TEST')
-  })
+  }));
 
-  test('should provide store and actions to custom functions', (done) => {
+  test('should provide store and actions to custom functions', () => new Promise<void>((resolve) => {
     const methods = testSetup({
       baz: ({ getState, actions }, arg) => {
         expect(getState()).toEqual(store.getState())
@@ -71,15 +72,15 @@ describe('mapActions()', () => {
         expect(Object.keys(actions).includes('toggleTodo')).toBe(true)
         expect(Object.keys(actions).includes('setVisibilityFilter')).toBe(true)
         expect(arg).toEqual('TEST')
-        done()
+        resolve()
       }
     })
 
     methods['baz']('TEST')
-  })
+  }));
 
   test('should warn if an action is not provided', () => {
-    console.warn = jest.fn()
+    console.warn = vi.fn()
     testSetup('notAvailable')
     expect(console.warn).toHaveBeenCalledWith('[redux-vuex] action notAvailable is not defined')
   })

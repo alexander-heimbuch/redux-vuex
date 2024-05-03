@@ -1,13 +1,16 @@
+import { describe, test, expect } from 'vitest';
 import { createApp } from 'vue'
 import { createStore } from 'redux'
+import { mount } from '@vue/test-utils'
 
 import { injectStore, injectActions } from '../src/tokens'
 import { provide as provideStore } from '../src/provide-store'
 import { reducers, actions } from './store'
 
 describe('provideStore()', () => {
-  test('should provide store and actions on root level', (done) => {
+  test('should provide store and actions on root level', () => new Promise<void>((resolve) => {
     const store = createStore(reducers)
+
 
     const TestComponent = {
       template: '<div>Test Component</div>',
@@ -18,7 +21,7 @@ describe('provideStore()', () => {
 
         expect(reduxStore).toEqual(store)
         expect(storeActions).toEqual(actions)
-        done()
+        resolve()
       }
     }
 
@@ -37,9 +40,10 @@ describe('provideStore()', () => {
     })
 
     app.mount('body')
-  })
+  }));
 
-  test('should provide store and actions on component level', (done) => {
+
+  test('should provide store and actions on component level', () => new Promise<void>((resolve) => {
     const store = createStore(reducers)
 
     const TestComponent = {
@@ -51,7 +55,7 @@ describe('provideStore()', () => {
 
         expect(reduxStore).toEqual(store)
         expect(storeActions).toEqual(actions)
-        done()
+        resolve()
       }
     }
 
@@ -69,5 +73,5 @@ describe('provideStore()', () => {
 
     const app = createApp(AppComponent)
     app.mount('body')
-  })
-})
+  }));
+});

@@ -1,4 +1,4 @@
-import * as get from 'get-value'
+import get from 'get-value'
 
 const defaultGetter = (prop) => (state) => get(state, prop)
 
