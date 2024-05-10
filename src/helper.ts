@@ -32,8 +32,7 @@ export const objectMapper = (props: MapOptions): PropertyMappers => {
 }
 
 export const applyMappers = (mappers: Mappers, modifier: (key: string, value: any) => any) =>
-  Object.keys(mappers).reduce((result, key) => {
-    const value = mappers[key]
+  Object.entries(mappers).reduce((result, [key, value]) => {
     return {
       ...result,
       [key]: modifier(key, value)
