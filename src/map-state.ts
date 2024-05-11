@@ -5,7 +5,7 @@ import { injectStore } from './tokens.js'
 import { objectMapper, applyMappers } from './helper.js'
 import { MapOptions, PropertyMappers } from './types.js'
 
-export function mapState<T>(...args: MapOptions) {
+export function mapState<T>(...args: MapOptions): T & Partial<any> {
   const defaultGetter = (prop: string) => (state: { [key: string]: any }) => get(state, prop)
 
   const store = injectStore()
@@ -28,5 +28,5 @@ export function mapState<T>(...args: MapOptions) {
 
   onUnmounted(unsubscribe)
 
-  return bindings as T;
+  return bindings as T
 }
