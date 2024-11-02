@@ -31,10 +31,12 @@
     "vue": "3.x"
   },
   "module": "./dist/redux-vuex.es.js",
+  "main": "./dist/redux-vuex.cjs.js",
   "types": "./dist/typings/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/redux-vuex.es.js",
+      "require": "./dist/redux-vuex.cjs.js",
       "types": "./dist/typings/index.d.ts"
     }
   },

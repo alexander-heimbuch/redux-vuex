@@ -6,7 +6,7 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig({
   build: {
     lib: {
-      formats: ['es'],
+      formats: ['es', 'cjs'],
       entry: resolve(__dirname, 'src', 'index.ts'),
       name: 'ReduxVuex',
       fileName: (format) => `redux-vuex.${format}.js`,
