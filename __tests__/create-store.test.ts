@@ -1,8 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { createApp } from 'vue'
 import { createStore } from 'redux'
-import { mount } from '@vue/test-utils'
-
 import { injectStore, injectActions } from '../src/tokens'
 import { provide as provideStore } from '../src/provide-store'
 import { reducers, actions } from './store'
