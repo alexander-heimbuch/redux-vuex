@@ -1,30 +1,16 @@
-import { objectMapper, applyMappers } from './helper.js'
+import { injectStore } from './tokens.js'
+import { ActionCreatorsMapObject, UnknownAction } from 'redux'
 
-import { MapOptions } from './types.js'
-import { injectStore, injectActions } from './tokens.js'
+type BoundActionCreator<A extends UnknownAction, P extends any[]> = (...args: P) => A
 
-export function mapActions(...args: MapOptions) {
+export function mapActions<A extends UnknownAction, P extends any[]>(params: ActionCreatorsMapObject<A, P>) {
   const store = injectStore()
-  const actions = injectActions()
 
-  const defaultAction = (key: string) => {
-    const action = actions[key]
-
-    if (!action) {
-      console.warn(`[redux-vuex] action ${key} is not defined`)
-      return
-    }
-
-    return (...args: any[]) => store.dispatch(action(...args))
-  }
-
-  const customAction = (fn: Function) => (...args: any[]) => {
-    fn.apply(null, [Object.assign({}, store, { actions }), ...args])
-  }
-
-  const mappers = objectMapper(args)
-
-  return applyMappers(mappers, (_, value) =>
-    typeof value === 'string' ? defaultAction(value) : customAction(value)
-  )
+  return Object.entries(params).reduce((result, [key, fn]) => {
+      return {
+        ...result,
+        [key]: (...args: P) => store.dispatch(fn.apply(null, args))
+      }
+    }, {} as Record<keyof typeof params, BoundActionCreator<A, P>>)
 }
+

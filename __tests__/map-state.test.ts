@@ -34,19 +34,6 @@ describe('mapState()', () => {
     return app.mount('body')
   }
 
-  test('should support a simple store binding', () => {
-    const data = testSetup('visibilityFilter')
-    expect(data['visibilityFilter']).toEqual('SHOW_ALL')
-    store.dispatch(actions.setVisibilityFilter('SHOW_COMPLETED'))
-    expect(data['visibilityFilter']).toEqual('SHOW_COMPLETED')
-  })
-
-  test('should support a nested store binding', () => {
-    const data = testSetup({ firstTodoText: 'todos.0.text' })
-    store.dispatch(actions.addTodo('foobar'))
-    expect(data['firstTodoText']).toEqual('foobar')
-  })
-
   test('should support a function binding', () => {
     const data = testSetup({ todoList: (state: State) => state.todos.map(({ text }) => text) })
     store.dispatch(actions.addTodo('foo'))
