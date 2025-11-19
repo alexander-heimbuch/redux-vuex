@@ -19,6 +19,7 @@
     "package": "vite build",
     "build": "npm run clean && npm run package && npm run typings",
     "test": "vitest",
+    "prepare": "husky install",
     "release": "release-it"
   },
   "dependencies": {
@@ -43,7 +44,7 @@
     "@vitejs/plugin-vue": "6.0.1",
     "@vue/test-utils": "2.4.5",
     "happy-dom": "14.7.1",
-    "husky": "9.0.11",
+    "husky": "9.1.7",
     "prettier": "3.2.5",
     "pretty-quick": "4.0.0",
     "redux": "5.0.1",
