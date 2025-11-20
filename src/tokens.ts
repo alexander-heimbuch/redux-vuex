@@ -1,6 +1,5 @@
-import { Store, createStore, combineReducers } from 'redux'
+import { Store, createStore, combineReducers, ActionCreatorsMapObject } from 'redux'
 import { inject, provide, App } from 'vue'
-import { Actions } from './types.js'
 
 export const storeToken = '$ReduxVuexStoreToken$'
 export const actionsToken = '$ReduxVuexActionsToken$'
@@ -17,7 +16,7 @@ export const provideStore = (store: Store, app?: App<any>) => {
   }
 }
 
-export const provideActions = (actions?: Actions, app?: App<any>) => {
+export const provideActions = (actions?: ActionCreatorsMapObject, app?: App<any>) => {
   if (!actions) {
     return
   }
@@ -41,4 +40,4 @@ export const injectStore = (): Store => {
   return store
 }
 
-export const injectActions = (): Actions => inject(actionsToken, {})
+export const injectActions = () => inject(actionsToken, {})

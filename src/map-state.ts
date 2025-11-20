@@ -1,25 +1,25 @@
-import get from 'get-value'
-import { ref, UnwrapRef, onUnmounted, reactive } from 'vue'
+import { ref, UnwrapRef, onUnmounted, reactive, Ref } from 'vue'
+import { injectStore } from './tokens'
 
-import { injectStore } from './tokens.js'
-import { objectMapper, applyMappers } from './helper.js'
-import { MapOptions, PropertyMappers } from './types.js'
+type Selector = (state: any) => any
 
-export function mapState<T>(...args: MapOptions): T & Partial<any> {
-  const defaultGetter = (prop: string) => (state: { [key: string]: any }) => get(state, prop)
-
+export function mapState<T extends Record<string, Selector>>(obj: T) {
   const store = injectStore()
+  const keysOfObj = Object.keys(obj) as Array<keyof typeof obj>
 
-  const mappers = objectMapper(args)
-  const getters: PropertyMappers = applyMappers(mappers, (_, value) =>
-    typeof value === 'string' ? defaultGetter(value) : value
-  )
-  const bindings: UnwrapRef<any> = reactive(applyMappers(mappers, (prop) => ref(prop)))
+  const bindings = reactive(
+    keysOfObj.reduce((result, key) => {
+      return {
+        ...result,
+        [key]: ref(key)
+      }
+    }, {} as T)
+  ) as T
 
   const updateBindings = () => {
-    Object.keys(mappers).forEach((prop) => {
-      bindings[prop] = getters[prop].call(null, store.getState())
-    })
+    for (const prop of keysOfObj) {
+      bindings[prop] = obj[prop](store.getState())
+    }
   }
 
   updateBindings()
@@ -28,5 +28,5 @@ export function mapState<T>(...args: MapOptions): T & Partial<any> {
 
   onUnmounted(unsubscribe)
 
-  return bindings as T
+  return bindings as { [K in keyof T]: ReturnType<T[K]> }
 }

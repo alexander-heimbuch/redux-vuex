@@ -1,6 +1,6 @@
 {
   "name": "redux-vuex",
-  "version": "3.1.3",
+  "version": "4.0.0",
   "description": "Redux bindings for VueJS inspired by Vuex.",
   "type": "module",
   "keywords": [
@@ -14,6 +14,7 @@
   "repository": "git@github.com:alexander-heimbuch/redux-vuex.git",
   "license": "MIT",
   "scripts": {
+    "pretty": "pretty-quick",
     "clean": "rm -rf dist/*",
     "typings": "tsc",
     "package": "vite build",
@@ -21,10 +22,6 @@
     "test": "vitest",
     "release": "release-it",
     "prepare": "husky install"
-  },
-  "dependencies": {
-    "get-value": "3.0.1",
-    "set-value": "4.1.0"
   },
   "peerDependencies": {
     "redux": "5.x",
@@ -35,23 +32,23 @@
   "types": "./dist/typings/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/typings/index.d.ts",
       "import": "./dist/redux-vuex.es.js",
-      "require": "./dist/redux-vuex.cjs.js",
-      "types": "./dist/typings/index.d.ts"
+      "require": "./dist/redux-vuex.cjs.js"
     }
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "5.0.4",
+    "@vitejs/plugin-vue": "6.0.1",
     "@vue/test-utils": "2.4.5",
     "happy-dom": "14.7.1",
-    "husky": "9.0.11",
+    "husky": "9.1.7",
     "prettier": "3.2.5",
-    "pretty-quick": "4.0.0",
+    "pretty-quick": "4.2.2",
     "redux": "5.0.1",
-    "release-it": "17.2.1",
+    "release-it": "19.0.6",
     "typescript": "5.4.5",
-    "vite": "5.2.11",
-    "vitest": "1.5.3",
+    "vite": "7.2.2",
+    "vitest": "4.0.10",
     "vue": "3.4.26",
     "@babel/types": "7.24.5"
   },

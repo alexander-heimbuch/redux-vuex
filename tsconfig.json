@@ -4,8 +4,10 @@
     "outDir": "./dist/typings",
     "emitDeclarationOnly": true,
     "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "noImplicitAny": true
   },
-  "include": ["./src/*.ts"]
+  "include": ["./src/*.ts", "./examples/*.ts"]
 }

@@ -17,7 +17,7 @@ Redux on the other hand is very adaptable to different scenarios giving you the 
 Valid point, it seems the needs for integrating with redux is strong. So depending on your requirements you may want to use:
 
 - [vuejs-redux](https://github.com/titouancreach/vuejs-redux) if you want provider bindings like react-redux
-- [vdeux](https://gitlab.com/citygro/vdeux) if you want a different kind of component bindings
+- [vdeux](https://gitlab.com/citygro/vdeux) if you want a different kind of component bindings. However, it's archived.
 - [revue](https://yarnpkg.com/en/package/revue) also for nice store bindings but unfortunately its dead :(
 
 ## Installation
@@ -56,26 +56,7 @@ app.mount('#app')
 
 ### mapState
 
-To assign state with ease to your component `mapState` needs to be used. It has two different signatures, depending on your component needs:
-
-#### Automatic
-
-If you want a 1:1 relationship between your redux store's state property names and your vue component's data then pass the names of these properties from redux as string arguments to `mapState`:
-
-```javascript
-import { mapState } from 'redux-vuex'
-
-export default {
-  name: 'My Vue Component',
-  setup() {
-    return mapState('users', 'todos') // maps state.users and state.todos to data.users and data.todos
-  }
-}
-```
-
-#### Custom property names
-
-Alternatively, if you provide an object to mapState you can specify data property names.
+To assign state with ease to your component `mapState` needs to be used. You can pass a function that has access to the state object:
 
 ```javascript
 import { mapState } from 'redux-vuex'
@@ -84,60 +65,36 @@ export default {
   name: 'My Vue Component',
   setup() {
     return mapState({
-      users: 'users', // maps state.users to data.users
-      todoList: 'todos' // maps state.todos to data.todoList
-    })
-  }
-}
-```
-
-#### Single property
-
-You can pass a function that has access to the state object if you want to
-
-```javascript
-import { mapState } from 'redux-vuex'
-
-export default {
-  name: 'My Vue Component',
-  setup() {
-    return mapState({
-      state: (state) => ({ todoList: state.todos, users: state.users }) // maps state.todos to data.state.todoList and state.users to data.state.users
-    })
-  }
-}
-```
-
-You can use the last two methods together like so
-
-```javascript
-import { mapState } from 'redux-vuex'
-
-export default {
-  name: 'My Vue Component',
-  setup() {
-    return mapState({
-      users: 'users', // maps state.users to data.users
       todoList: (state) => state.todos // maps state.todos to data.todoList
     })
   }
 }
 ```
 
-Note: using the object notation gives you the ability to use [store selectors](https://github.com/reduxjs/redux/blob/b3f1c1699293ee7d0f185c24ea45957ff865bfca/examples/shopping-cart/reducers/index.js#L10-L37).
+You can also directly pass [store selectors](https://github.com/reduxjs/redux/blob/b3f1c1699293ee7d0f185c24ea45957ff865bfca/examples/shopping-cart/reducers/index.js#L10-L37) to have `mapState` automatically infer the resulting state object
+
+```javascript
+import { mapState } from 'redux-vuex'
+
+export default {
+  name: 'My Vue Component',
+  setup() {
+    return mapState({
+      todoList: selectors.todos // maps the result returned by the `todos` selector to data.todoList
+    })
+  }
+}
+```
 
 ### mapActions
 
-For a more convenient action dispatching `mapActions` can be used. To use this helper you need to pass in the actions in the `connect` function (see above):
+For a more convenient action dispatching `mapActions` can be used.
 
 ```javascript
 const actions = {
-  foo: payload => {
-    type: 'FOO', payload
-  },
-
-  bar: () => {
-    type: 'BAR', payload: { bar: 'baz' }
+  foo: (payload) => {
+    type: 'FOO', 
+    payload
   }
 }
 ```
@@ -148,31 +105,10 @@ import { mapActions } from 'redux-vuex'
 export default {
   name: 'My Vue component',
   setup() {
-    return mapActions('foo', 'bar') // creates scoped functions for foo and bar action
+    return mapActions({foo: actions.foo}) // creates scoped functions for foo and bar action
   }
   mounted() {
-    this.foo('baz') // will dispatch { type: 'FOO', payload: 'baz' }
-  }
-}
-```
-
-If you need to dispatch multiple actions in one method (or want to assign different names), use the object notation:
-
-```javascript
-import { mapActions } from 'redux-vuex'
-
-export default {
-  name: 'My Vue component',
-  setup() {
-     return mapActions({
-        baz: ({ dispatch, actions }, arg1, arg2) => {
-          dispatch(actions.foo(arg2))
-          dispatch(actions.bar())
-        }
-     })
-  }
-  mounted() {
-    this.baz('foo', 'bar') // will dispatch foo and bar actions
+    this.foo('bar') // will dispatch { type: 'FOO', payload: 'bar' }
   }
 }
 ```
@@ -215,10 +151,9 @@ export default {
   setup() {
     return {
       state: mapState({
-        users: 'users', // maps state.users to data.users
         todoList: (state) => state.todos // maps state.todos to data.todoList
       }),
-      ...mapActions('foo', 'bar')
+      ...mapActions(...)
     }
   }
 }
@@ -230,7 +165,7 @@ export default {
 - `mapState` creates a reference binding form the redux store
 - Each Vue Component with bindings creates a store subscription
 - On each state change all bindings are evaluated and update
-- Only the mapped properties are retrieved from store and setted
+- Only the mapped properties are retrieved from store and set
 
 ## License
 
