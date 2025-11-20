@@ -14,13 +14,14 @@
   "repository": "git@github.com:alexander-heimbuch/redux-vuex.git",
   "license": "MIT",
   "scripts": {
+    "pretty": "pretty-quick",
     "clean": "rm -rf dist/*",
     "typings": "tsc",
     "package": "vite build",
     "build": "npm run clean && npm run package && npm run typings",
     "test": "vitest",
-    "prepare": "husky install",
-    "release": "release-it"
+    "release": "release-it",
+    "prepare": "husky install"
   },
   "peerDependencies": {
     "redux": "5.x",
@@ -42,7 +43,7 @@
     "happy-dom": "14.7.1",
     "husky": "9.1.7",
     "prettier": "3.2.5",
-    "pretty-quick": "4.0.0",
+    "pretty-quick": "4.2.2",
     "redux": "5.0.1",
     "release-it": "19.0.6",
     "typescript": "5.4.5",

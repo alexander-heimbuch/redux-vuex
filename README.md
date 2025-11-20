@@ -92,8 +92,9 @@ For a more convenient action dispatching `mapActions` can be used.
 
 ```javascript
 const actions = {
-  foo: payload => {
-    type: 'FOO', payload
+  foo: (payload) => {
+    type: 'FOO', 
+    payload
   }
 }
 ```

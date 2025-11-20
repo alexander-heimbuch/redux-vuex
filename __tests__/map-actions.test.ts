@@ -34,29 +34,31 @@ describe('mapActions()', () => {
     return app.mount('body')
   }
 
-  test('should remap actions', () => new Promise<void>((resolve) => {
-    const methods = testSetup({ addTodo: actions.addTodo, toggleTodo: actions.toggleTodo })
+  test('should remap actions', () =>
+    new Promise<void>((resolve) => {
+      const methods = testSetup({ addTodo: actions.addTodo, toggleTodo: actions.toggleTodo })
 
-    store.subscribe(() => {
-      const state: State = store.getState()
-      expect(state.todos[0].text).toEqual('TEST')
-      resolve()
-    })
+      store.subscribe(() => {
+        const state: State = store.getState()
+        expect(state.todos[0].text).toEqual('TEST')
+        resolve()
+      })
 
-    methods.addTodo('TEST')
-  }));
+      methods.addTodo('TEST')
+    }))
 
-  test('should remap actions', () => new Promise<void>((resolve) => {
-    const methods = testSetup({ addTodos: actions.addTodos })
+  test('should remap actions', () =>
+    new Promise<void>((resolve) => {
+      const methods = testSetup({ addTodos: actions.addTodos })
 
-    store.subscribe(() => {
-      const state: State = store.getState()
-      expect(state.todos[0].text).toEqual('TEST1')
-      expect(state.todos[1].text).toEqual('TEST2')
-      expect(state.todos[2].text).toEqual('TEST3')
-      resolve()
-    })
+      store.subscribe(() => {
+        const state: State = store.getState()
+        expect(state.todos[0].text).toEqual('TEST1')
+        expect(state.todos[1].text).toEqual('TEST2')
+        expect(state.todos[2].text).toEqual('TEST3')
+        resolve()
+      })
 
-    methods.addTodos(['TEST1', 'TEST2', 'TEST3'])
-  }))
+      methods.addTodos(['TEST1', 'TEST2', 'TEST3'])
+    }))
 })

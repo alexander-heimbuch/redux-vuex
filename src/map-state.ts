@@ -7,12 +7,14 @@ export function mapState<T extends Record<string, Selector>>(obj: T) {
   const store = injectStore()
   const keysOfObj = Object.keys(obj) as Array<keyof typeof obj>
 
-  const bindings = reactive(keysOfObj.reduce((result, key) => {
-    return {
-      ...result,
-      [key]: ref(key)
-    }
-  }, {} as T)) as T
+  const bindings = reactive(
+    keysOfObj.reduce((result, key) => {
+      return {
+        ...result,
+        [key]: ref(key)
+      }
+    }, {} as T)
+  ) as T
 
   const updateBindings = () => {
     for (const prop of keysOfObj) {
@@ -26,5 +28,5 @@ export function mapState<T extends Record<string, Selector>>(obj: T) {
 
   onUnmounted(unsubscribe)
 
-  return bindings as { [K in keyof T ]: ReturnType<T[K]> }
+  return bindings as { [K in keyof T]: ReturnType<T[K]> }
 }

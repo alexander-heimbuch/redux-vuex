@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "noImplicitAny": true
   },
-   "include": ["./src/*.ts", "./examples/*.ts"]
+  "include": ["./src/*.ts", "./examples/*.ts"]
 }

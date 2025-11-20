@@ -20,7 +20,7 @@ export const actions = {
   }),
   addTodos: (texts: string[]) => ({
     type: 'ADD_TODOS',
-    payload: texts.map(text => ({
+    payload: texts.map((text) => ({
       id: nextTodoId++,
       text
     }))
@@ -33,7 +33,10 @@ export const VisibilityFilters = {
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
-const todos = (state: State["todos"] = [], action: {type: string, payload: Partial<State['todos'][number]>}) => {
+const todos = (
+  state: State['todos'] = [],
+  action: { type: string; payload: Partial<State['todos'][number]> }
+) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -47,7 +50,7 @@ const todos = (state: State["todos"] = [], action: {type: string, payload: Parti
     case 'ADD_TODOS':
       return [
         ...state,
-        ...action.payload.map(({id, text}) => ({
+        ...action.payload.map(({ id, text }) => ({
           id,
           text,
           completed: false
@@ -62,7 +65,10 @@ const todos = (state: State["todos"] = [], action: {type: string, payload: Parti
   }
 }
 
-const visibilityFilter = (state = VisibilityFilters.SHOW_ALL, action: {type: string; payload: string}) => {
+const visibilityFilter = (
+  state = VisibilityFilters.SHOW_ALL,
+  action: { type: string; payload: string }
+) => {
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
       return action.payload
