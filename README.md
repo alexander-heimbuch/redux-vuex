@@ -88,7 +88,7 @@ export default {
 
 ### mapActions
 
-For a more convenient action dispatching `mapActions` can be used. To use this helper you need to pass in the actions in the `connect` function (see above):
+For a more convenient action dispatching `mapActions` can be used.
 
 ```javascript
 const actions = {
